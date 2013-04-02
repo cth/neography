@@ -2,7 +2,7 @@ module Neography
   class Connection
     USER_AGENT = "Neography/#{Neography::VERSION}"
 
-    attr_accessor :protocol, :server, :port, :directory,
+    attr_accessor :protocol, :server, :port, :directory, :timeout,
       :cypher_path, :gremlin_path,
       :log_file, :log_enabled, :logger,
       :max_threads,
@@ -13,6 +13,7 @@ module Neography
       config = merge_configuration(options)
       save_local_configuration(config)
       @client = HTTPClient.new
+      @client.receive_timeout = @timeout
     end
 
     def configure(protocol, server, port, directory)
@@ -71,6 +72,7 @@ module Neography
       @server         = config[:server]
       @port           = config[:port]
       @directory      = config[:directory]
+      @timeout        = config[:timeout]
       @cypher_path    = config[:cypher_path]
       @gremlin_path   = config[:gremlin_path]
       @log_file       = config[:log_file]

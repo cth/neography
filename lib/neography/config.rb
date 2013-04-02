@@ -1,7 +1,7 @@
 module Neography
   class Config
 
-    attr_accessor :protocol, :server, :port, :directory,
+    attr_accessor :protocol, :server, :port, :directory, :timeout,
       :cypher_path, :gremlin_path,
       :log_file, :log_enabled,
       :max_threads,
@@ -18,6 +18,7 @@ module Neography
         :server         => @server,
         :port           => @port,
         :directory      => @directory,
+        :timeout        => @timeout,
         :cypher_path    => @cypher_path,
         :gremlin_path   => @gremlin_path,
         :log_file       => @log_file,
@@ -37,6 +38,7 @@ module Neography
       @server         = "localhost"
       @port           = 7474
       @directory      = ""
+      @timeout        = 0 # 0 means no timeout 
       @cypher_path    = "/cypher"
       @gremlin_path   = "/ext/GremlinPlugin/graphdb/execute_script"
       @log_file       = "neography.log"
